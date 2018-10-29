@@ -1,0 +1,107 @@
+import java.io.*;
+import java.util.Scanner;
+class Node {
+
+	int data;
+	Node next;
+	Node(){
+		
+	}
+	public Node(int data)
+	{
+		this.data=data;
+	}
+	public int getData() {
+		return data;
+	}
+	public void setData(int data) {
+		this.data = data;
+	}
+	public Node getNext() {
+		return next;
+	}
+	public void setNext(Node next) {
+		this.next = next;
+	}
+}
+
+public class linkedlist {
+Node head;
+	void pushnode(Node newnode)
+{
+	if(head==null)
+		head=newnode;
+	else 
+	{
+		Node current=head;
+		while(current.getNext()!=null)
+		current=current.getNext();
+		current.setNext(newnode);
+	}
+}
+	void segregate()
+	{
+		Node evenhead=null,evencurrent=null,oddhead=null,oddcurrent=null,current;
+		current=head;
+		while(current!=null)
+		{	if(current.getData()%2==0)
+			{
+				if(evenhead==null)
+				{	evenhead=current;
+					evencurrent=evenhead;
+					}
+					else
+				{	evencurrent.setNext(current);
+					evencurrent=evencurrent.getNext();
+					
+				}
+			}
+			else
+			{
+				if(oddhead==null)
+				{			
+					oddhead=current;
+					oddcurrent=oddhead;
+				}
+					else	
+			{
+					oddcurrent.setNext(current);
+					oddcurrent=oddcurrent.getNext();			
+				}	
+			}
+		current=current.getNext();
+	}
+	if(evenhead==null||oddhead==null)
+		return ;
+		evencurrent.setNext(oddhead);
+	head=evenhead;
+	}
+	public void print(Node head)
+	{
+		Node print=head;
+	if(print==null)
+		return;
+		while(print!=null)
+			{
+			System.out.print(print.getData()+" ");
+			print=print.getNext();
+			}
+	}
+public static void main(String[] args) {
+	linkedlist list=new linkedlist();
+	Scanner sc=new Scanner(System.in);
+int t=sc.nextInt();
+while(t>0){
+	int n=sc.nextInt();
+	for(int i=0;i<n;i++)
+	{
+		Node newnode=new Node(sc.nextInt());
+		list.pushnode(newnode);
+	}
+	list.segregate();
+list.print(list.head);
+System.out.println();
+t--;
+}
+}
+}
